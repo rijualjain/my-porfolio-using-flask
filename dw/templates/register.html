@@ -1,0 +1,26 @@
+{% for message in get_flashed_messages() %}
+<h2>{{ message }}</h2>
+{% endfor %}
+<link rel=stylesheet type=text/css href="../static/register.css">
+<form method="post">
+  <p>
+    {{ form.hidden_tag()}}
+</p>
+<br>
+<p>
+  {{ form.username.label }} {{form.username}}
+</p>
+<br>
+<p>
+  {{ form.email.label }} {{form.email}}
+</p>
+<br><p>
+  {{ form.password.label }} {{form.password}}
+</p>
+<br><p>
+  {{ form.confirm_password.label }} {{form.confirm_password}}
+</p>
+<br>
+<p></p>
+{{ form.submit}}
+</form> 

@@ -1,0 +1,27 @@
+.form-container {
+  width: 500px;
+  padding: 20px;
+  background-color: #f2f2f2;
+  margin: auto;
+}
+
+.form-container input[type=text], .form-container input[type=password] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+
+.form-container input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.form-container input[type=submit]:hover {
+  background-color: #45a049;
+}

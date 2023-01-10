@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block content %}
+<p>
+    {{ form.hidden_tag()}}
+</p>
+<br>
+<p>
+    {{ form.username.label }} {{form.username}}
+</p>
+<br>
+<p>
+    {{ form.message.lable}} {{form.message}}
+</p>
+<br>
+
+{{ form.submit}}
+{% endblock %}    

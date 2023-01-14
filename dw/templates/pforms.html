@@ -1,17 +1,21 @@
 {% extends "layout.html" %}
+{% for message in get_flashed_messages() %}
+<h2>{{ message }}</h2>
+{% endfor %}
 {% block content %}
+<form method="post">
 <p>
     {{ form.hidden_tag()}}
 </p>
 <br>
 <p>
-    {{ form.username.label }} {{form.username}}
+    {{ form.username.label }} {{current_user.username}}
 </p>
 <br>
 <p>
-    {{ form.message.lable}} {{form.message}}
+    {{ form.message.label }} {{form.message}}
 </p>
 <br>
-
 {{ form.submit}}
-{% endblock %}    
+</form>
+{% endblock %}

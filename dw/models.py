@@ -12,7 +12,7 @@ class Contact(db.Model):
         return '<Contact %r>' % self.id
 
 class User(db.Model,UserMixin):
-    ID = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     hashed_password = db.Column(db.String(60), nullable=False)
@@ -31,14 +31,17 @@ class User(db.Model,UserMixin):
 
     def __repr__(self):
         return f"User('{self.username}', '{self.email}')"
+    
+    def get_id(self):
+        return self.id
 
 class Pforms(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(20), db.ForeignKey('user.id'), unique=True, nullable=False)
+    username = db.Column(db.String(15), db.ForeignKey('user.username'), unique=True, nullable=False)
     message= db.Column(db.Text, nullable=False)
-    
-    def repr(self):
+    def __repr__(self):
         return '<Pforms %r>' % self.id
+
 
 @login_manager.user_loader
 def load_user(user_id):

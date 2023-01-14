@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, flash, url_for
 from dw.forms import ContactForm, LoginForm, RegistrationForm, PublicForm
 from dw.models import Contact, User, Pforms
 from dw import app, db
+from flask_login import login_required, login_user, current_user
 
 @app.route("/")
 
@@ -40,7 +41,6 @@ def register():
     db.session.commit()
     flash('Registration successful!')
     return redirect(url_for('registered'))
-
   return render_template('register.html',title='Register',form=form)
 
 @app.route("/registered", methods=['GET'])
@@ -56,17 +56,19 @@ def login():
         if user is None or not user.verify_password(form.password.data):
             flash('Invalid username or password')
             return redirect(url_for('login'))
+        login_user(user)
         flash('You\'ve successfully logged in')
         return redirect(url_for('publicforms'))
     return render_template('login.html', form=form)
 
 @app.route("/publicforms", methods=['GET','POST'])
+@login_required
 def publicforms():
     form = PublicForm()
     if form.validate_on_submit():
-        pforms = Pforms(username=current_user.username, message=form.message.data)
+        pforms = Pforms(username= current_user.username, message=form.message.data)
         db.session.add(pforms)
         db.session.commit()
         flash("Your post has been added.")
     messages = Pforms.query.all()
-    return render_template('pforms.html', form=form, messages=messages)
+    return render_template('pforms.html', form=form, messages=messages,)

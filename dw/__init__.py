@@ -17,4 +17,7 @@ db = SQLAlchemy(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
 from dw import routes
